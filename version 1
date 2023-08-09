@@ -1,0 +1,26 @@
+import cv2
+import numpy as np
+import face_recognition
+import math
+
+img1= face_recognition.load_image_file()
+img1=cv2.cvtColor(img1.cv2.COLOR_BGR2RGB)
+test_img1= face_recognition.load_image_file()
+test_img1=cv2.cvtColor(test_img1.cv2.COLOR_BGR2RGB)
+
+faceLoc=face_recognition.face_locations(img1)[0]
+encodeImg = face_recognition.face_encodings(img1)[0]
+cv2.rectangle(img1,(faceLoc[3].faceLoc[0]),(faceLoc[2].faceLoc[0]),(225,0,225),2)
+
+faceLoc_test=face_recognition.face_locations(test_img1)[0]
+encodeImg_test = face_recognition.face_encodings(test_img1)[0]
+cv2.rectangle(test_img1,(faceLoc[3].faceLoc[0]),(faceLoc[2].faceLoc0[0]),(225,0,225),2)
+
+results = face_recognition.compare_faces([encodeImg],encodeImg_test)
+faceDis = face_recognition.face_distance([encodeImg],encodeImg_test)
+print(results)
+cv2.putText(test_img1,f'{results} {round(faceDis,2)}',(50,50),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,225),2)
+
+cv2.imshow('image'.img1)
+cv2.imshow('Test image'.test_img1)
+cv2.waitKey(0)
